@@ -62,8 +62,7 @@ class Tree {
   }
 
   insert(value) {
-    let currNode = this.root;
-    this.insertRecursive(value, currNode);
+    this.root = this.insertRecursive(value, this.root);
   }
 
   insertRecursive(value, currNode) {
@@ -80,6 +79,8 @@ class Tree {
     } else if (value > currNode.data) {
       currNode.right = this.insertRecursive(value, currNode.right);
     }
+
+    return currNode;
   }
 
   getSuccessor(node) {
@@ -226,9 +227,12 @@ class Tree {
 
   rebalance(root, array = []) {
     if (root === null) {
-      return array;
+      return;
     }
-    this.rebalance(root.left);
+    this.rebalance(root.left, array);
+    array.push(root.data);
+    this.rebalance(root.right, array);
+    return array;
   }
 }
 
@@ -239,4 +243,11 @@ function test(node) {
 const newTree = new Tree();
 let root = newTree.buildTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
 newTree.prettyPrint(root);
+newTree.insert(25);
+newTree.insert(26);
+newTree.prettyPrint(root);
 console.log(newTree.isBalanced(root));
+let array = newTree.rebalance(root);
+console.log(array);
+root = newTree.buildTree(array);
+newTree.prettyPrint();
