@@ -169,7 +169,6 @@ class Tree {
       return;
     }
     this.inOrder(callback, root.left);
-    console.log(callback(root));
     this.inOrder(callback, root.right);
   }
 
@@ -223,6 +222,13 @@ class Tree {
     return Math.abs(leftHeight - rightHeight) > 1
       ? false
       : this.isBalanced(root.left) && this.isBalanced(root.right);
+  }
+
+  rebalance(root, array = []) {
+    if (root === null) {
+      return array;
+    }
+    this.rebalance(root.left);
   }
 }
 
