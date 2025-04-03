@@ -236,10 +236,7 @@ class Tree {
   }
 }
 
-function test(node) {
-  return node.data;
-}
-
+//testing balancing and rebalancing
 const newTree = new Tree();
 let root = newTree.buildTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
 newTree.prettyPrint(root);
@@ -250,4 +247,5 @@ console.log(newTree.isBalanced(root));
 let array = newTree.rebalance(root);
 console.log(array);
 root = newTree.buildTree(array);
-newTree.prettyPrint();
+newTree.prettyPrint(root);
+console.log(newTree.isBalanced(root));
